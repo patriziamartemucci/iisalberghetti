@@ -11,6 +11,7 @@ import java.io.UnsupportedEncodingException;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
+
 public class ScriviFileBase64 {
 
 	public static void main(String args[]) throws Exception{
