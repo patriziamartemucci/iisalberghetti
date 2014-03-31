@@ -9,7 +9,7 @@ public class NonIntResultException extends Exception{
 	  }
 
 	  public String toString() {
-	    return "Il risultato di " + n + " / " + d +
+	    return "NonIntResultException: Il risultato di " + n + " / " + d +
 	           " non è intero.";
 	  }
 	
