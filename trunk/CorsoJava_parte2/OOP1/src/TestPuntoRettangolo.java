@@ -28,6 +28,8 @@ public class TestPuntoRettangolo {
 		System.out.println("r2 "+r2);
 		System.out.println("area di r2 "+r2.area());
 		System.out.println("perimetro  di r2 "+r2.perimetro());
+		
+		Rettangolo r3=new Rettangolo(new Punto(10,2),3,4);
 	}
 
 }
