@@ -2,21 +2,36 @@ package it.alberghetti.geometriaPiano2D;
 
 public class Punto {
 
+	public static int contaPunti;
+	
+	public static final double PIGRECO=3.14;
 	private double x;
 	private double y;
 	
-	public Punto(double a){
-		x=a;y=a;
+	static{
+		contaPunti=0;
 	}
+	
+	public static double doppioValore(double a){
+		return a*PIGRECO;
+	}
+	public Punto(double a){
+		this(a,a);
+		contaPunti++;
+	}
+	
 	public Punto(){
-		x=0;y=0;
+		//this(0,0);
+		contaPunti++;
 	}
 	
 	public Punto(double a,double b){
 		x=a;y=b;
+		contaPunti++;
 	}
-	public void setX(double a){
-		x=a;
+	
+	public void setX(double x){
+		this.x=x;
 	}
 	public void setY(double b){
 		y=b;;
@@ -30,9 +45,11 @@ public class Punto {
 	public double getY(){
 		return y;
     }
+	
 	public void trasla(double deltax,double deltay){
 		x=x+deltax;
 		y=y+deltay;
+		
 	}
 	public double distanza(Punto p){
 		double d;
@@ -42,9 +59,15 @@ public class Punto {
 	
 	public double distanza(){
 		double d;
-		d=Math.sqrt((x)*(x)+(y)*(y));
+		Punto p=new Punto();
+		d=this.distanza(p);
 		return d;
 	}	
+	
+	public void finalize(){
+		System.out.println("Fine di punto. L'oggetto sara eliminato");
+		contaPunti--;
+	}
 	/*
 	public String toString(){
 		String s;
