@@ -26,8 +26,8 @@ public class TestPunto {
 		System.out.println("Punto.contaPunti: "+Punto.contaPunti);
 		System.gc();
 		p2.trasla(2,3);
-		p2.doppioValore(4);
-		Punto.doppioValore(5);
+		p2.doppio(4);
+		Punto.doppio(5);
 		System.out.println("p2.x: "+p2.getX()+
 				"   p2.y: "+p2.getY());
 		
