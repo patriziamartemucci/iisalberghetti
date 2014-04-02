@@ -12,8 +12,8 @@ public class Punto {
 		contaPunti=0;
 	}
 	
-	public static double doppioValore(double a){
-		return a*PIGRECO;
+	public static double doppio(double a){
+		return a*2;
 	}
 	public Punto(double a){
 		this(a,a);
