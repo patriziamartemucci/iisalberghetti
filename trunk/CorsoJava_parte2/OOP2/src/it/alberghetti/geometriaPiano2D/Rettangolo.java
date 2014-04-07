@@ -29,31 +29,18 @@ public class Rettangolo implements Cloneable{
 	}
 
 	public void setPointLeftUp(Punto t) throws PuntoNonValidoInRettangolo{
-		try{
+		
 			if (t.getX() < pointRightDown.getX() && t.getY() > pointRightDown.getY())
 				pointLeftUp = t;
-			else throw new PuntoNonValidoInRettangolo(1);
-		}
-		catch(PuntoNonValidoInRettangolo er){
-			throw er;
-			//System.out.println("Messaggio di errore: "+er);
-		}
-		/*
-		catch(Exception e){
-			System.out.println("Altra eccezione "+e);
-		}
-		*/
+			else throw new PuntoNonValidoInRettangolo(1);		
 	}
 
 	public void setPointRightDown(Punto b) throws PuntoNonValidoInRettangolo {
-		try{
+		
 		if (b.getX() > pointLeftUp.getX() && b.getY() < pointLeftUp.getY())
 			pointRightDown = b;
 		else throw new PuntoNonValidoInRettangolo(0);
-		}catch(PuntoNonValidoInRettangolo er){
-			throw er;
-			//System.out.println("Messaggio di errore: "+er);
-		}
+		
 	}
 	
 	public Punto getPointLeftUp() {
