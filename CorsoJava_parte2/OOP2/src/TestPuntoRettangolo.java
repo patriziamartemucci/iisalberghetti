@@ -34,15 +34,23 @@ public class TestPuntoRettangolo {
 		System.out.println("\n\nRichiamo il metodo setPointLeftUp");
 		try{
 			r1.setPointLeftUp(new Punto(10,0));
-		}catch(PuntoNonValidoInRettangolo e){
-			System.out.println("Messaggio di errore in main: "+e);
+		}
+		catch(PuntoNonValidoInRettangolo e){
+			System.out.println("Eccezione PuntoNonValidoInRettangolo: "+e);
+		}
+		catch(Exception e){
+			System.out.println("Altra eccezione: "+e.getMessage());
 		}
 		System.out.println("\n\nRichiamo il metodo setPointRightDown");
 		try{
 			r1.setPointRightDown(new Punto(0,10));
 		
-		}catch(PuntoNonValidoInRettangolo e){
-			System.out.println("Messaggio di errore in main: "+e);
+		}
+		catch(PuntoNonValidoInRettangolo e){
+			System.out.println("Eccezione PuntoNonValidoInRettangolo: "+e);
+		}
+		catch(Exception e){
+			System.out.println("Altra eccezione: "+e.getMessage());
 		}
 		
 	}
