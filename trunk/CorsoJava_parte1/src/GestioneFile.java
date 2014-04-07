@@ -6,7 +6,6 @@ import java.io.*;
  * - salvare i dati contenuti in una stringa nel file <br>
  * - leggere i dati contenuti in un file e salvarli in una stringa<br>
  * Il nome del file viene passato come parametro al costruttore.
- * @GestioneFile.java
  * @author Patrizia Martemucci
  * @version 1.00 2007/10/26
  */
@@ -22,7 +21,7 @@ public class GestioneFile{
 
     	/**
 	 *Salva nel file il contenuto di una stringa passata come parametro.
-	 * Se il parametro append è true, apre il file in append, altrimenti apre il file in scrittura e lo sovrascrive.
+	 * Se il parametro append ï¿½ true, apre il file in append, altrimenti apre il file in scrittura e lo sovrascrive.
 	 *@param contenuto stringa da salvare nel file
 	 *@return Restituisce true se la scrittura nel file ha avuto successo, false altrimenti
 	 */
@@ -46,7 +45,7 @@ public class GestioneFile{
 		return true;
     }
     /**
-	 *Legge il contenuto di un file, il cui nome è indicato nel costruttore, 
+	 *Legge il contenuto di un file, il cui nome ï¿½ indicato nel costruttore, 
 	 * e lo inserisce in una stringa. In caso di errore, restituisce una stringa vuota.
 	 *@return contenuto del file
 	 */
