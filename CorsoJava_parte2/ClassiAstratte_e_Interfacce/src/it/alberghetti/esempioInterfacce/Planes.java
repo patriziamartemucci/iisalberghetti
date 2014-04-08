@@ -2,7 +2,6 @@ package it.alberghetti.esempioInterfacce;
 
 public class Planes implements Movable{
 
-	@Override
 	public boolean start() {
 		//fai ci� che serve per far partire l'aereo
 		//e restituisci true in caso di successo
