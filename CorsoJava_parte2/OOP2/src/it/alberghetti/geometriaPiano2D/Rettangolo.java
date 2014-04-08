@@ -44,11 +44,11 @@ public class Rettangolo implements Cloneable{
 	}
 	
 	public Punto getPointLeftUp() {
-		return pointLeftUp;
+		return (Punto)pointLeftUp.clone();
 	}
 
 	public Punto getPointRightDown() {
-		return pointRightDown;
+		return (Punto)pointRightDown.clone();
 	}
 
 	/**
