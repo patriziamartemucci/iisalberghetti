@@ -10,7 +10,7 @@ public class TestPunto {
 		Punto p3=new Punto(4,6);
 		Punto p4=p3;
 		System.out.println("Metodo toString()");
-		System.out.println("p: "+p);
+		System.out.println("p: "+p.toString());
 		System.out.println("p2: "+p2);
 		System.out.println("p3: "+p3);
 		System.out.println("p4: "+p4);
