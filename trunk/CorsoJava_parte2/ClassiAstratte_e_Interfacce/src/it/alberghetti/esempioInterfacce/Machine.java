@@ -4,6 +4,7 @@ public abstract class Machine implements Movable {
 	//essendo una classe astratta posso implementare solo alcuni metodi e 
 	//demandare l'implementazione degli altri ad una classe derivata
 	
+	public abstract void foo();
 	@Override
 	public boolean start() {
 		//fai ci� che serve per far partire la macchina
