@@ -124,8 +124,9 @@ public class Data implements Comparable{
 		int res=0;
 		Data d2=(Data)o;
 		if(aa==d2.aa && mm==d2.mm && gg==d2.gg)return res;
-		if(aa>d2.aa){//d1>d2
-			
+		if(aa>d2.aa){
+			//d1>d2
+			res=1;
 		}
 		else if(aa<d2.aa){
 			//d1 < d2
@@ -149,7 +150,7 @@ public class Data implements Comparable{
 					//d1<d2
 					res=-1;
 				}
-				//else d1=d2
+				//else d1=d2 --> res=0
 			}
 		}
 		return res;
