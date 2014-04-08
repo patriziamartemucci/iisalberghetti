@@ -66,6 +66,7 @@ public class Quadrilatero //implements Cloneable
 		catch(CloneNotSupportedException e){
 			throw e;
 		}
+		
 	}
 	
 	public boolean equals(Object o){

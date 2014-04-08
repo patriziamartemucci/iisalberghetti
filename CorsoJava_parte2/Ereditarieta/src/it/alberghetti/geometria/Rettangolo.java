@@ -5,8 +5,7 @@ public class Rettangolo extends Quadrilatero implements Cloneable{
 	protected int colore;
 	
 	public Rettangolo(){
-		super();
-		this.colore=0;
+		this(0,0,0);
 		System.out.println("Classe Rettangolo: costruttore senza parametri");
 	}
 	
