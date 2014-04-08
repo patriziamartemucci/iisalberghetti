@@ -30,7 +30,3 @@ public class OperazioneBanca {
 		return "In data " + data.getTime() + " e' stato eseguito un " + tipoOperazione + " di " + valore + " euro.";
 	}
 }
-
-enum TipoOperazione {
-	VERSAMENTO, PRELIEVO;
-}
