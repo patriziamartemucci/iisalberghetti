@@ -12,6 +12,12 @@ public class Collaudo {
 		Quadrilatero q1=new Quadrilatero();
 		System.out.println("\n\nCrea oggetto Quadrilatero q2");
 		Quadrilatero q2=new Quadrilatero(1,2,3,4);
+		if(q1.equals(q2)){
+			System.out.println("q1 e q2 sono uguali");
+		}
+		else{
+			System.out.println("q1 e q2 sono diversi");
+		}
 		System.out.println("\n\nOggetto Quadrilatero q2: "+q2);
 		System.out.println("area di q2: "+q2.area());
 		Quadrilatero q3 = null;
