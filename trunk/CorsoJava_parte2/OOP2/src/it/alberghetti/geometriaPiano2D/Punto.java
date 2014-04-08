@@ -71,6 +71,10 @@ public class Punto implements Cloneable{
 	
 	//override del metodo toString di Object
 	public String toString(){
+		/*
+		String s=super.toString();
+		s=s+"   e il mio Punto("+x+","+y+")";
+		*/
 		String s;
 		s="Punto("+x+","+y+")";
 		return s;

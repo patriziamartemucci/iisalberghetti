@@ -52,6 +52,9 @@ public class TestPuntoRettangolo {
 		catch(Exception e){
 			System.out.println("Altra eccezione: "+e.getMessage());
 		}
+		Punto pc=r2.getPointLeftUp();
+		System.out.println("P3 vale "+p3+"\npc (clone di p3) vale "+pc);
+		
 		
 	}
 	
