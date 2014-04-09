@@ -5,7 +5,7 @@ public class TestDispositivoIO {
 		PortaSeriale ps=new PortaSeriale();	
 		Porta p2=pp;
 		//Porta p3=new Porta();
-		DispositivoIO dp=new DispositivoIO(pp);
+		DispositivoIO dp=new DispositivoIO(p2);
 		DispositivoIO ds=new DispositivoIO(ps);
 		//Dispositivo d=new Dispositivo();
 		
