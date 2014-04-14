@@ -1,0 +1,6 @@
+Questi esempi li ho scaricati dal sito della oracle
+
+http://docs.oracle.com/javase/tutorial/uiswing/examples/misc/index.html#TranslucentWindowDemo
+
+Per eseguire SplashDemo:
+java -splash:images/splash.gif SplashDemo
