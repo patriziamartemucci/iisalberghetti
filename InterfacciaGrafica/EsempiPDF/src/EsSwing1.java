@@ -17,5 +17,6 @@ public class EsSwing1 {
 		
 		//chiude il programma quando clicco sul pulsante di chiusura della finestra
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	}
 }
