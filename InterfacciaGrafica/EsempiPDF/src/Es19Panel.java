@@ -25,7 +25,7 @@ class Es19Panel extends JPanel implements ActionListener
 	
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		String scelta = (String) list.getSelectedItem();
 		// recupera la voce selezionata o scritta
