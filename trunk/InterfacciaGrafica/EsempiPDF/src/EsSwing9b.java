@@ -8,6 +8,7 @@ public class EsSwing9b {
 		c.add(p);
 		f.setVisible(true);
 		f.setBounds(100, 100, 300, 170);
-		f.addWindowListener(new Terminator());
+		Terminator t=new Terminator();
+		f.addWindowListener(t);
 	} 
 }
