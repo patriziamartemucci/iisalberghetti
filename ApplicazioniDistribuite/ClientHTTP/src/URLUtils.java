@@ -4,8 +4,9 @@ import java.io.*;
 public class URLUtils {
   public static void main(String s[]) {
     
-    //URLUtils.dump("http://www.imolug.org");
-    URLUtils.dump("http://tools.whois.net/yourip/");
+    URLUtils.dump("http://www.imolug.org");
+    //URLUtils.dump("http://tools.whois.net/yourip/");
+    //URLUtils.dump("http://www.alberghetti.it");
     System.out.println("\n**************");
   }
 
