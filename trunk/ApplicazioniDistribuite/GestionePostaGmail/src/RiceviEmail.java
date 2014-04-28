@@ -58,11 +58,12 @@ public static void ricevi(String pop3, String username, String password) {
 
 	System.out.println("Ci sono "+messaggi.length+" messaggi di posta nella tua casella email");
 	if (messaggi.length!=0) {
-		InputStreamReader im=new InputStreamReader(messaggi[0].getInputStream());
-		System.out.println("\nLeggo il messaggio n.0"+": \nContentType: "+messaggi[0].getContentType()+
-				"\nMittente: "+messaggi[0].getFrom()[0]);
+		int nmes=messaggi.length-1;
+		InputStreamReader im=new InputStreamReader(messaggi[nmes].getInputStream());
+		System.out.println("\nLeggo il messaggio n."+nmes+": \nContentType: "+messaggi[nmes].getContentType()+
+				"\nMittente: "+messaggi[nmes].getFrom()[0]);
 		
-		System.out.println("\nSubject: "+messaggi[0].getSubject()+"\nContenuto: ");
+		System.out.println("\nSubject: "+messaggi[nmes].getSubject()+"\nContenuto: ");
 		//stampa il contenuto del messaggio 0
 		int x;
 		do{
