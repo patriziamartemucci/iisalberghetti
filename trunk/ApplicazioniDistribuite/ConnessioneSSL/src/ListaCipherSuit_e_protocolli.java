@@ -3,7 +3,7 @@
 	import javax.net.ssl.SSLServerSocket;
 	import javax.net.ssl.SSLServerSocketFactory;
 	import javax.net.ssl.SSLSocket;
-	public class ServerDEMO {
+	public class ListaCipherSuit_e_protocolli {
 	  public static void main(String[] argv) throws Exception {
 	    SSLServerSocketFactory factory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
 	    SSLServerSocket serverSocket = (SSLServerSocket) factory.createServerSocket(7070);
