@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 
 import java.io.OutputStreamWriter;
 //Per eseguirlo:
-//java -Djavax.net.ssl.keyStore=server.jks -Djavax.net.ssl.keyStorePassword=serverPassword SSL_Server_Socket
+//java -Djavax.net.ssl.keyStore=server.jks -Djavax.net.ssl.keyStorePassword=password SSL_Server_Socket
 import java.io.PrintWriter;
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;

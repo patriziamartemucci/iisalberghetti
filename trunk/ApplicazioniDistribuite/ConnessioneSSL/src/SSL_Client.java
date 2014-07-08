@@ -1,6 +1,6 @@
 
 //Per eseguirlo:
-//java -Djavax.net.ssl.trustStore=serverTrustStore.jks -Djavax.net.ssl.keyStorePassword=serverPassword SSL_Client
+//java -Djavax.net.ssl.trustStore=serverTrustStore.jks -Djavax.net.ssl.keyStorePassword=password SSL_Client
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
