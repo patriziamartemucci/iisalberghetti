@@ -6,7 +6,6 @@ import java.util.Properties;
 
 public class ResourceManager {
 	private static String JDBC_DRIVER = "org.postgresql.Driver";
-//	private static String JDBC_URL = "jdbc:postgresql://localhost/DBDrone";
 
 	private static String JDBC_USER = "";
 	private static String JDBC_PASSWORD = "";

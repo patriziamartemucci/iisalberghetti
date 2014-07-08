@@ -1,3 +1,12 @@
+//E' necessario includere nel progetto il jar
+// postgresql-9.1-903.jdbc4.jar
+
+//
+
+// I certificati devono essere in 
+//serverTrustStore.jks il certificato root.ctr
+//postgresql.p12 il certificato client per la connessione al DB (il suo CN deve contenere lo username dell'utente autorizzato ad accedere al DB)
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
