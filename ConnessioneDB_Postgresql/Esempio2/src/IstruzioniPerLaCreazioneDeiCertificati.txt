@@ -1,0 +1,206 @@
+Installare openssl
+Il keytool è compreso nel JDK
+
+Creazione CA
+------------
+
+genera una chiave per la CA
+openssl genrsa -des3 -out ca.key 1024
+
+genera un certificato valido 10 anni
+openssl req -new -x509 -key ca.key -out ca.crt -days 3650
+
+Verranno richieste le info da inserire nel certificato. Fare attenzione al campo CN, che deve contenere un identificativo univoco (per esempio www.myconpany.CA.it)
+Il certificato appena creato sarà utilizzato esclusivamente per firmare tutti gli altri certificati generati in seguito.
+Rinominiamo ca.crt in root.crt (per poter utilizzare il certificato in postgresql senza cambiare i nomi impostati di default)
+
+Certificato server
+------------------
+openssl genrsa -des3 -out server.key 1024  //genera la chiave
+ openssl rsa -in server.key -out server.key  //elimina la password (x postgres e altre applicazioni)
+ openssl req -new -key server.key -out server.csr  //genera una richiesta di firma per il certificato
+openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -out server.crt -CAcreateserial -days 3650
+Il campo CN deve contenere un identificativo univoco (per esempio www.myconpany.it)
+mettiamo chiave privata e certificato in un file pem
+in Linux
+# cat server.key > server.pem
+# cat server.crt >> server.pem
+
+in windows
+type server.key server.crt > server.pem
+Mettiamo il pem in un p12
+openssl pkcs12 -export -in server.pem -out server.p12 -name "server"
+Importare il p12  in un keystore (utile lato java)
+keytool -v -importkeystore -srckeystore server.p12 -srcstoretype PKCS12 -destkeystore server.jks -deststoretype JKS -alias server
+
+
+Importare il root.crt in un trustStore (utile lato java)
+keytool -import -alias root -file root.crt -keystore serverTrustStore.jks
+
+Certificato client
+-------------------
+openssl genrsa -des3 -out postgresql.key 1024  //genera la chiave
+ openssl rsa -in postgresql.key -out postgresql.key  //elimina la password (x postgresql e altre applicazioni)
+ openssl req -new -key postgresql.key -out postgresql.csr  //genera una richiesta di firma per il certificato. Inseriamo le info richieste. Il campo CN (deve contenere un identificativo univoco, come per esempio un indirizzo email) conterrà il nome dell'utente che avrà accesso al DB tramite connessione SSL. Questo nome utente sarà presente in postgresql (sarà l'utente che avrà accesso al DB) e nel file pg_hba.conf 
+openssl x509 -req -in postgresql.csr -CA ca.crt -CAkey ca.key -out postgresql.crt -CAcreateserial -days 365  //certificato valido un anno
+
+Anche questo certificato andrà messo in un p12
+
+
+
+Installazione certificati 
+--------------------------
+Linux
+-----
+Cambiare i permessi dei file contenenti le chiavi (server.key e postgresql.key devono essere il lettura/scrittura solo ai proprietari) con il comando
+chmod 600 server.key
+chmod 600 postgresql.key
+
+se i certificati sono stati creati dall'utente root (o da qualsiasi altro utente) cambiare anche il proprietario delle chiavi:
+per server.key il proprietario deve essere l'utente postgres
+chown postgres:postgres server.key
+per postgresql.key il proprietario sarà l'utente linux che richiede l'accesso al DB
+chown utente:gruppo postgresql.key
+
+lato server postgresql
+Da utente root accedere alla cartella 
+/var/lib/postgresql/9.1/main
+e copiare i certificati 
+server.crt
+server.key
+root.crt
+
+lato client postgresql
+Se non esiste, creare nella cartella home una cartella nascosta di nome 
+.postgresql
+copiare in questa cartella i file
+postgresql.crt
+postgresql.key
+root.crt
+
+
+Windows 7
+---------
+lato server postgresql
+Da utente administrator accedere alla cartella C:\Program Files\PostgreSQL\9.1\data (ammesso che postregqs sia stato installato nella cartella Program Files) e copiare i file
+server.crt
+server.key
+root.crt
+
+lato client postgresql
+Visualizzare i file nascosti. Andare nella cartella dell'utente che dovrà accedere al DB, per esempio C:\Users\Patrizia\AppData\Roaming\postgresql, e copiare qui i file
+postgresql.crt
+postgresql.key
+root.crt
+
+
+Configurazione postgresql (file postgresql.conf e pg_hba.conf)
+--------------------------------------------------------------
+In Linux, come utente root accedere alla cartella 
+/etc/postgresql/9.1/main
+In Windows, da administrator, posizionarsi nella cartella C:\Program Files\PostgreSQL\9.1\data
+
+postgresql.conf
+---------------
+Aprire il file postgresql.conf
+In corrispondenza della riga di commento 
+what IP address(es) to listen on;
+mettere 
+listen_addresses = '*'
+togliere il commento alle righe
+ssl = true				# (change requires restart) 
+ssl_ciphers = 'ALL:!ADH:!LOW:!EXP:!MD5:@STRENGTH'	# allowed SSL ciphers
+password_encryption = on
+
+pg_hba.conf 
+-----------
+Aprire il file pg_hba.conf 
+e, dopo i commenti iniziali, configurare come segue
+
+# Database administrative login by Unix domain socket 
+local   all             postgres                                peer 
+# TYPE  DATABASE        USER            ADDRESS                 METHOD 
+# "local" is for Unix domain socket connections only 
+#commenta la prossima riga 
+#local   all             all                                     peer 
+# IPv4 local connections: 
+# martemucci.patrizia@alberghetti.it è contenuto nel campo CN del certificato postgresql.crt
+#accesso ssl al db postgres per l'utente martemucci.patrizia@alberghetti.it da qualsiasi ip
+hostssl	postgres	martemucci.patrizia@alberghetti.it		0.0.0.0/0		cert 
+#da localhost possono accedere tutti utilizzando la password 
+host    all             all             127.0.0.1/32            md5 
+#l'utente postgres può accedere a tutti i db da qualsiasi host utilizzando la password 
+host all postgres 0.0.0.0/0 md5 
+# IPv6 local connections:
+host    all             all             ::1/128                 md5 
+# Allow replication connections from localhost, by a user with the 
+# replication privilege. 
+#local   replication     postgres                                peer 
+#host    replication     postgres        127.0.0.1/32            md5 
+#host    replication     postgres        ::1/128                 md5
+
+
+
+La modifica di questi due file di configurazione o dei certificati lato server richiede il riavvio del servizio.
+Per riavviare il servizio in Linux 
+/etc/init.d/postgresql stop
+/etc/init.d/postgresql start
+
+Da Windows il servizio può essere arrestato/ravviato da 
+pannello di controllo ? Sistema e sicurezza ? Strumenti di amministrazione ? servizi
+oppure da prompt (eseguire il prompt dei comandi come amministratore) con 
+sc stop postgresql-9.1 //per fermare il servizio
+sc start postgresql-9.1  //per riavviare il servizio
+Per elencare tutti i servizi 
+sc query | more //scorrere le pagine premendo la barra spaziatrice
+
+Oppure da powershell (avviata con i privilegi di amministrazione)
+per conoscere il nome del servizio
+get-service p* // elenca tutti i servizi che iniziano con p
+start-service postgresql-9.1
+stop-service postgresql-9.1
+
+----------------------------
+*            Test          *
+----------------------------
+Avviare pgadmin e creare un nuovo utente nella sezione login roles. Il nome utente deve essere uguale al nome contenuto nel campo CN del certificato postgresql.crt.  
+Per il momento non diamogli nessun permesso, tranne quelli che postgres imposta di default (can login e poco altro)
+Nella tool bar cliccare sulla prima icona a sinistra, add a connection to a server.
+Inserire nei campi le seguenti info 
+Name: provaSSL
+Host: 127.0.0.1
+Port: 5432
+Maintenance DB: postgres
+Username: nome utente specificato nel campo CN del certificato postgresql.crt
+togliere la spunta su store password
+
+Cliccare sul tab SSL e selezionare nel campo SSL la voce require. 
+Avendo messo i certificati nella home, non è necessario specificare altro.
+
+Tornare sul tab Properties e cliccare su OK.
+Se tutto è andato a buon fine si aprirà la connessione al DB postgres.
+Una volta disconnesso il server, alla successiva richiesta di connessione si aprirà 
+la finestra che richiede l'inserimento della password.
+Per connettersi sarà sufficiente cliccare su ok senza fornire alcuna password.
+
+
+----------------------------------------
+*           JAVA  e PostgreSQL         *
+----------------------------------------
+I file postgresql.p12 e serverTrustStore.jks saranno utilizzati dall'applicazione client, 
+mentre i certificati server.crt, server.key e root.key saranno
+installati come spiegato nel capitolo "Installazione certificati"
+
+--------------------------------------------------------------------------------------
+*           JAVA  Applicazione client/server SSL  (client-side authentication)       *
+--------------------------------------------------------------------------------------
+Per l'implementazione di un server SSL in java saranno necessari i seguenti file 
+(i nomi utilizzati sono solo un esempio):
+Lato server 
+serverSSL.jks (certificato firmato dalla CA) e trustStore.jks (deve contenere il root.crt) 
+Lato client
+client.p12 (certificato firmato dalla CA) e trustStore.jks (che contiene root.crt)
+
+Se il nostro server deve collegarsi al DB utilizzando SSL deve avere anche il 
+certificato postgresql.p12, essendo il nostro server SSL un client rispetto al 
+server PostgreSQL
