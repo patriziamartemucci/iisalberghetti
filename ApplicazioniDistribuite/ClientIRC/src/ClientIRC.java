@@ -4,6 +4,10 @@ import java.awt.event.*;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
+/*
+ * Server: irc-azzurra.org
+ * Canale: Imolug
+ */
 public final class ClientIRC
 {
 	comandiIrc irc;
@@ -162,7 +166,7 @@ public final class ClientIRC
         	PanelBasso.setLayout(new GridLayout(2,2));
         	PanelBasso.add(new JLabel("Scrivi qui il messaggio da inviare: "));
         	PanelBasso.add(JTFMess);
-        	PanelBasso.add(new JLabel("Modalità esperti - Scrivi qui direttamente il comando: "));
+        	PanelBasso.add(new JLabel("Modalitï¿½ esperti - Scrivi qui direttamente il comando: "));
         	PanelBasso.add(JTFComando);
         	//PanelBasso.add(JBinviaMess);
                         
@@ -216,8 +220,8 @@ public final class ClientIRC
         				JTAricevuti.append("> connessione...\n");
         				if(JTFurl.getText().equals("") || JTFnick.getText().equals("") || 
         						JTFcanale.getText().equals("") ){
-        					System.out.println("Uno dei campi necessari per la connessione è vuoto");
-        					JTAricevuti.append("Uno dei campi necessari per la connessione è vuoto\n\n");
+        					System.out.println("Uno dei campi necessari per la connessione ï¿½ vuoto");
+        					JTAricevuti.append("Uno dei campi necessari per la connessione ï¿½ vuoto\n\n");
         					return;
         				}
         				server=JTFurl.getText();
@@ -275,8 +279,8 @@ public final class ClientIRC
         			System.out.println("bottone = CAMBIA CANALE");
         			String nuovoCanale=JTFcanale.getText();
         			if(nuovoCanale.equals("")){
-        				System.out.println("Il campo canale è vuoto");
-        				JTAricevuti.append("\nIl campo canale è vuoto.\n\n");
+        				System.out.println("Il campo canale ï¿½ vuoto");
+        				JTAricevuti.append("\nIl campo canale ï¿½ vuoto.\n\n");
         			}
         			else{
         				irc.esciChan();
