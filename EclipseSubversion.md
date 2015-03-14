@@ -1,0 +1,51 @@
+# Introduction #
+
+Istruzioni per l'installazione e l'utilizzo del plugin
+Subclipse per Eclipse
+
+
+# Details #
+Per poter accedere alla pagina Source in scrittura è necessario essere membri inseriti in "Project Commiters".
+
+> dalla pagina
+> https://code.google.com/p/iisalberghetti/
+> andate su Project Home e cliccate sul collegamento al vostro nome (link a destra sotto Project committers). Cliccate su Settings e prendere nota della googlecode.com password. Se non vedete settings è perchè non siete loggati su google. Per loggarsi (con le credenziali con cui si accede a gmail), cliccare su Sign in (link in alto a destra)
+
+> nel sito
+> http://subclipse.tigris.org/servlets/ProjectProcess?pageID=p4wYuA
+> trovate le istruzioni su come installare il plugin SVN per Eclipse
+
+> installato SVN, per inserire l'indirizzo di googlecode da Eclipse aprite
+> Windows -> Open Perspective -> Other
+> e selezionate SVN Repository Exploring.Cliccate su Add a new SVN Repository (finetra a sinistra, icona in alto a destra)e inserite la Url:
+> https://iisalberghetti.googlecode.com/svn/trunk/
+> > Dovrebbe chiedervi username e password. Come user mettete il vostro nome gmail nome@gmail.com (solo il nome senza @gmail.com). La password è quella recuperata al punto 1)
+
+
+> dovreste ora vedere l'albero delle directory di googlecode in SVN Repository
+
+> per tornare alla prospettiva java, di nuovo Window->Open Pespective->Other e poi selezionate Java o Java Browsing
+
+> Per creare il progetto collegato a quello su GoogleCode?
+> File->New->Other e selezionate
+> Checkout Projects from SVN
+> Selezionare il repository SVN
+> Selezionare la cartella sul repository. Si apre il Wizard per creare il progetto in locale.
+> Per creare un nuovo progetto: selezionate Checkout a project configured using the New Project Wizard. A questo punto si apre la finestra del wizard per la creazione di un nuovo progetto Java. Proseguire normalmente.
+> Per scaricare un porgetto esistente: selezionare Check out as a project in the workspace
+
+> per scaricare l'ultima versione di un progetto (o di una singola classe), fate l'update: in Package Explorer col tasto destro sul nome del progetto
+> team->update.
+
+> per fare il commit (pubblicare una nuova versione dell'applicazione):in Package Explorer col tasto destro sul nome del progetto (o della singola classe)
+> team->commit
+
+
+
+> Creare una nuova directory remota
+> Per creare una nuova directory sulla pagina source di googlecode, da Eclipse:
+> Window->OpenPerspective?->Other
+> Selezionate SVN Repository Exploring
+> Nella finestra a sinistra, la SVN Repository, espandere l'albero delle directory e col tasto destro selezionate
+> New -> Remote Folder
+> per creare una nuova sottocartella nella cartella selezionata.
